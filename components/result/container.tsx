@@ -9,7 +9,16 @@ export default function Container() {
   const text = useRecoilValue(textState);
   const [random, setRandom] = useState();
 
-  const item = ["응", "어 아니야", "글쎄", "과연?"];
+  const item = [
+    "응",
+    "그럴 것 같아",
+    "어 아니야",
+    "글쎄",
+    "과연?",
+    "어지럽네",
+    "이건 좀..",
+    "멈춰!",
+  ];
   const randomValue = item[Math.floor(Math.random() * item.length)];
 
   useEffect(() => {
@@ -18,12 +27,10 @@ export default function Container() {
 
   return (
     <Wrapper>
-      <Link href="/">
-        <TextBox>
-          <h1>&ldquo;{text}&ldquo;</h1>
-          <p>질문에 대한 소라고동님의 답변입니다.</p>
-        </TextBox>
-      </Link>
+      <TextBox>
+        <h1>&ldquo;{text}&ldquo;</h1>
+        <p>질문에 대한 소라고동님의 답변입니다.</p>
+      </TextBox>
       <Image src="/imgs/main/spiralShell.svg" />
       <Answer>&ldquo;{randomValue}&ldquo;</Answer>
       <Link href="/question">
@@ -53,6 +60,8 @@ const TextBox = styled.div`
   flex-direction: column;
 
   & > h1 {
+    width: 330px;
+    text-align: center;
     margin: 0;
     font-size: 28px;
     color: ${theme.blackColor};

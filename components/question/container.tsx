@@ -3,10 +3,13 @@ import { theme } from "../../styles/theme";
 import { useRecoilState } from "recoil";
 import { textState } from "../../utils/store/text";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 
 export default function Container() {
   const [text, setText] = useRecoilState(textState);
+  const focus = useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const getText = (e: any) => {
     setText(e.target.value);
@@ -14,8 +17,18 @@ export default function Container() {
 
   useEffect(() => {
     setText("");
+    if (focus && focus.current) {
+      focus.current.focus();
+    }
   }, []);
 
+  const submit = () => {
+    if (text) {
+      router.push("/result");
+    } else {
+      alert("공백은 입력할 수 없습니다.🥲");
+    }
+  };
   return (
     <Wrapper>
       <Link href="/">
@@ -25,14 +38,13 @@ export default function Container() {
         </TextBox>
       </Link>
       <Input
+        ref={focus}
         placeholder="질문을 입력해주세요!"
         type="text"
         value={text}
         onChange={getText}
       />
-      <Link href="/result">
-        <Button>시작하기</Button>
-      </Link>
+      <Button onClick={submit}>시작하기</Button>
     </Wrapper>
   );
 }

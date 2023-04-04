@@ -5,6 +5,7 @@ import { textState } from "../../utils/store/text";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
+import { KeyboardEvent } from "react";
 
 export default function Container() {
   const [text, setText] = useRecoilState(textState);
@@ -29,6 +30,13 @@ export default function Container() {
       alert("공백은 입력할 수 없습니다.🥲");
     }
   };
+
+  const handleOnKeyPress = (e: any) => {
+    if (e.key === "Enter") {
+      submit();
+    }
+  };
+
   return (
     <Wrapper>
       <Link href="/">
@@ -43,6 +51,7 @@ export default function Container() {
         type="text"
         value={text}
         onChange={getText}
+        onKeyDown={handleOnKeyPress}
       />
       <Button onClick={submit}>시작하기</Button>
     </Wrapper>

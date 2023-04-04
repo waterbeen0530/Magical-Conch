@@ -3,14 +3,18 @@ import { theme } from "../../styles/theme";
 import { useRecoilState } from "recoil";
 import { textState } from "../../utils/store/text";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function Container() {
   const [text, setText] = useRecoilState(textState);
 
   const getText = (e: any) => {
     setText(e.target.value);
-    console.log(text);
   };
+
+  useEffect(() => {
+    setText("");
+  }, []);
 
   return (
     <Wrapper>

@@ -10,14 +10,14 @@ export default function Container() {
   const [random, setRandom] = useState();
 
   const item = [
-    "응",
-    "그럴 것 같아",
     "어 아니야",
     "글쎄",
-    "과연?",
-    "어지럽네",
     "이건 좀..",
     "멈춰!",
+    "응",
+    "그럴 것 같아",
+    "당연하지",
+    "응원해",
   ];
   const randomValue = item[Math.floor(Math.random() * item.length)];
 
